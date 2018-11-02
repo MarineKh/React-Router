@@ -12,3 +12,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.rr--flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.rr--flex-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column
+}
+.rr--flex-align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+      align-items: center
+}
+.rr--flex-align-end {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+      align-items: flex-end;
+}
+.rr--text-center {
+  text-align: center;
+}
+li {
+  cursor: pointer;
+}
