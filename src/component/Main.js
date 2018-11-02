@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import axios from 'axios';
 import UsersList from './UsersList'
 import Albums from './Albums'
-import Photos from './Photos'
+// import Photos from './Photos'
 
 const API_USERS = 'https://jsonplaceholder.typicode.com/users'
-const API_Albums = 'https://jsonplaceholder.typicode.com/users/1/albums'
+// const API_Albums = `https://jsonplaceholder.typicode.com/users/2/albums`
 
 
 class Main extends Component {
@@ -15,7 +15,8 @@ class Main extends Component {
 
         this.state = {
             users: [],
-            albums: []
+            albums: [],
+            currentItemId: 0
         }
 
         this.fetchUsers = this.fetchUsers.bind(this)
@@ -25,7 +26,6 @@ class Main extends Component {
 
     componentDidMount() {
         this.fetchUsers()
-        this.fetchAlbums()
     }
 
     fetchUsers() {
@@ -40,8 +40,10 @@ class Main extends Component {
             )
     }
 
-    fetchAlbums() {
-        axios.get(API_Albums)
+    fetchAlbums(id) {
+        // debugger
+        console.log('fetchAlbums id', id);
+        axios.get(`https://jsonplaceholder.typicode.com/users/${id}/albums`)
             .then(result => {
                 for (let val of result.data) {
                     this.setState({
@@ -54,7 +56,12 @@ class Main extends Component {
     }
 
     userClick(e) {
-        console.log(e.target);
+        // let current = this.state.users.filter(obj => obj.id !== );
+        this.fetchAlbums(e.target.id)
+        this.setState({
+            currentItemId: e.target.id
+        })
+        console.log(e.target.id);
     }
 
     render() {

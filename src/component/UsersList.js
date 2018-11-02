@@ -2,19 +2,16 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default class UsersList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        let usersName = this
-            .props
-            .usersName
-            .map((user, index) => <li
-                className='user-name'
+        let usersName = this.props.usersName.map((user, index) =>
+            <li className='user-name'
                 key={index}
-                onClick={this.props.onUserClickhandler} user={{ user }}>
-                {user.name}
+                id={user.id}
+                onClick={this.props.onUserClickhandler} user={user}
+            >
+                <Link to={`/users/${user.id}`}>
+                    {user.name}
+                </Link>
             </li>)
 
         return (
