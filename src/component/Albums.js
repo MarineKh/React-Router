@@ -21,9 +21,6 @@ export default class Albums extends Component {
       albumsList: []
     };
   }
-  static propTypes = {
-    match: ReactRouterPropTypes.match.isRequired
-  };
 
   componentDidMount() {
     this.fetchAlbums();
@@ -37,20 +34,17 @@ export default class Albums extends Component {
         }/albums`
       )
       .then(result => {
-        for (let val of result.data) {
-          this.setState({
-            albumsList: [...this.state.albumsList, val.title]
-          });
-          console.log(result.data);
-          console.log(this.state.albumsList);
-        }
+        this.setState({
+          albumsList: [...this.state.albumsList, ...result.data]
+        });
+        // console.log("state", this.state.userList);
       })
       .catch(error => console.log(error));
   }
 
   render() {
+    console.log(this.state.albumsList);
     const { albumsList } = this.state;
-    console.log(this.props.match.params.id);
     return (
       <div className="list">
         <h2>
@@ -82,4 +76,8 @@ export default class Albums extends Component {
       </div>
     );
   }
+
+  static propTypes = {
+    match: ReactRouterPropTypes.match.isRequired
+  };
 }

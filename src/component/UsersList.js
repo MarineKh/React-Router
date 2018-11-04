@@ -28,7 +28,7 @@ export default class UsersList extends Component {
         this.setState({
           userList: [...this.state.userList, ...result.data]
         });
-        console.log("state", this.state.userList);
+        // console.log("state", this.state.userList);
       })
       .catch(error => console.log(error));
   }

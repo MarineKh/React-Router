@@ -14,10 +14,7 @@ class App extends Component {
       <div>
         <Router>
           <div>
-            {/* <Main /> */}
-            {/* <Navigation /> */}
             <Switch>
-              {/* <Route path="/" component={Main} /> */}
               <Route path="/" component={UsersList} />
               <Route path="/users/:id" component={Albums} />
               <Route path="/users/:id/albums/:id" component={Photos} />
