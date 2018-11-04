@@ -1,30 +1,64 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
+import axios from "axios";
+
+const API_USERS = "https://jsonplaceholder.typicode.com/users";
 
 export default class UsersList extends Component {
-  render() {
-    let usersName = this.props.usersName.map((user, index) => (
-      <li
-        className="user-name"
-        key={index}
-        id={user.id}
-        onClick={this.props.onUserClickhandler}
-        user={user}
-      >
-        {/* <Link to={`/users/${user.id}`}>{user.name}</Link> */}
-        {user.name}
-      </li>
-    ));
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      userList: []
+    };
+  }
+  componentDidMount() {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
+    axios
+      .get(API_USERS)
+      .then(result => {
+        this.setState({
+          userList: [...this.state.userList, ...result.data]
+        });
+        console.log("state", this.state.userList);
+      })
+      .catch(error => console.log(error));
+  }
+
+  render() {
+    const { userList } = this.state;
     return (
-      <Router>
-        <div>
-          <span>Users</span>
-          <ul className="rr--user-list">
-            <Link to={"/usersaa"}>{usersName}</Link>
-          </ul>
-        </div>
-      </Router>
+      <div className="list">
+        <h2>
+          <Link to="/" className="title">
+            Users
+          </Link>
+        </h2>
+
+        <ul>
+          {userList.map((item, index) => {
+            return (
+              <li key={index}>
+                <NavLink
+                  key={index}
+                  to={`/users/${item.id}`}
+                  activeClassName="active"
+                >
+                  {item.name}
+                </NavLink>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   }
 }

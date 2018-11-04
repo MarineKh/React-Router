@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import UsersList from './UsersList'
+import UsersList from "./UsersList";
 import Albums from "./Albums";
 import Photos from "./Photos";
 import Error from "./Error";
@@ -16,7 +17,8 @@ class App extends Component {
             {/* <Main /> */}
             {/* <Navigation /> */}
             <Switch>
-              <Route path="/" component={Main} />
+              {/* <Route path="/" component={Main} /> */}
+              <Route path="/" component={UsersList} />
               <Route path="/users/:id" component={Albums} />
               <Route path="/users/:id/albums/:id" component={Photos} />
               <Route component={Error} />
