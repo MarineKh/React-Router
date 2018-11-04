@@ -17,20 +17,15 @@ export default class UsersList extends Component {
       userList: []
     };
   }
-  componentDidMount() {
-    this.fetchUsers();
-  }
 
-  fetchUsers() {
-    axios
-      .get(API_USERS)
-      .then(result => {
+  componentDidMount() {
+    fetch(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => res.json())
+      .then(json => {
         this.setState({
-          userList: [...this.state.userList, ...result.data]
+          userList: json
         });
-        // console.log("state", this.state.userList);
-      })
-      .catch(error => console.log(error));
+      });
   }
 
   render() {

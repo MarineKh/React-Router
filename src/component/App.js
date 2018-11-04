@@ -14,12 +14,12 @@ class App extends Component {
       <div>
         <Router>
           <div>
-            <Switch>
-              <Route path="/" component={UsersList} />
-              <Route path="/users/:id" component={Albums} />
-              <Route path="/users/:id/albums/:id" component={Photos} />
-              <Route component={Error} />
-            </Switch>
+            {/* <Switch> */}
+            <Route path="/" component={UsersList} />
+            <Route path="/users/:id" component={Albums} />
+            <Route path="/users/:id/albums/:id" component={Photos} />
+            {/* <Route component={Error} /> */}
+            {/* </Switch> */}
           </div>
         </Router>
       </div>

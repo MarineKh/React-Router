@@ -26,24 +26,27 @@ export default class Albums extends Component {
     this.fetchAlbums();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.fetchAlbums();
+    }
+  }
+
   fetchAlbums() {
-    axios
-      .get(
-        `https://jsonplaceholder.typicode.com/users/${
-          this.props.match.params.id
-        }/albums`
-      )
-      .then(result => {
+    fetch(
+      `https://jsonplaceholder.typicode.com/users/${
+        this.props.match.params.id
+      }/albums`
+    )
+      .then(res => res.json())
+      .then(json => {
         this.setState({
-          albumsList: [...this.state.albumsList, ...result.data]
+          albumsList: json
         });
-        // console.log("state", this.state.userList);
-      })
-      .catch(error => console.log(error));
+      });
   }
 
   render() {
-    console.log(this.state.albumsList);
     const { albumsList } = this.state;
     return (
       <div className="list">
